@@ -1,3 +1,4 @@
+PREFIX = /usr/local
 CC  = g++
 OPT = -O3
 LIBS = -lntl -lgmp -lm -lrt
@@ -18,10 +19,11 @@ endif
 all: hel_example
 
 install: libhel.so
-	cp libhel.so /usr/local/lib/libhel.so
+	mkdir -p $(PREFIX)/lib
+	cp libhel.so $(PREFIX)/lib/libhel.so
 
 uninstall:
-	rm -rf /usr/local/lib/libhel.so
+	rm -rf $(PREFIX)/lib/libhel.so
 
 libhel.so: hel_wrapper.o hel_execute.o hel_enum.o hel_histo.o hel_init.o hel_util.o aes.o scores_example_data.o scores_example.o
 	$(CC) -o libhel.so hel_wrapper.o scores_example.o scores_example_data.o hel_execute.o hel_enum.o hel_histo.o hel_init.o hel_util.o aes.o $(LINK_FLAGS)
