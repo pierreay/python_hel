@@ -91,12 +91,18 @@ git clone https://github.com/eurecom-s3/python-hel
 cd python-hel
 ```
 
-Compile and install the library.
+Compile the library.
 ```
 cd hel_wrapper
 make AES_TYPE=aes_ni # Intel AES NI
 # make TYPE=aes_simple  # Software AES
-sudo make install
+```
+
+Install the library.
+```
+cd hel_wrapper
+sudo make install # Default to /usr/local
+# sudo make PREFIX=MYPATH install # Default to MYPATH
 sudo ldconfig
 ```
 
@@ -130,9 +136,9 @@ sudo ninja uninstall
 Then, you have to install the python module.
 ```
 cd python_hel/python_hel
-python2 setup.py install
-# python2 setup.py install --user # To install locally instead of system wide
-# python2 setup.py develop # To make changes to the source effective immediately
+pip install --break-system-packages .
+# pip install --break-system-packages --user .     # To install locally instead of system wide
+# pip install --break-system-packages --editable . # To make changes to the source effective immediately
 ```
 
 ## <a name="Examples"></a>Examples
